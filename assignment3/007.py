@@ -26,10 +26,6 @@ if __name__ == "__main__":
 
 opp_move = args.last_opponent_move
 
-if opp_move != None
-    print("silent")
-
-
 
 
 def pick_move(self):
