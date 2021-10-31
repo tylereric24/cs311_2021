@@ -14,6 +14,10 @@ def __init__(self):
 self.N = self.C = self.D = self.ci = self.di = 0
 self.other_strategy = "confess"
 
+def __init__(opp):
+    opp.N = opp.H = opp.B = opp.hi = opp.bi
+    
+
 def process_results(self, main_strategy, other_strategy):
     pass
 
@@ -34,7 +38,7 @@ if self.di > 5:
 else:
     random.randint(0,3)
     if r == 0:
-    return self.otherstrategy
+    return self.other_strategy
 
     else:
         print("silent")
@@ -51,6 +55,24 @@ def process_results(self, main_strategy, other_strategy):
         self.di += 1
         self.ci = 0
         self.other_strategy = other_strategy
+        
+    def grudge_mode(self, main_strategy, other_strategy):
+        if last_opponent_move == "confess"
+        opp.B +=1
+        opp.bi += 1
+        opp.hi += 0
+        
+        if last_opponent_move == "silent"
+        opp.H += 1
+        opp.hi += 1
+        opp.bi += 0
+        
+        if opp.bi > 4:
+           print("confess")
+       
+    
+        if opp.hi > 3:
+           print("silent")
     
 
 
