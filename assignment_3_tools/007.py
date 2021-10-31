@@ -1,61 +1,67 @@
-import argparse
-import random
-import json
+name = "007"
+    classifier = {
+        "memory_depth": float("inf"),
+        "stochastic": True,
+        "long_run_time": False,
+        "inspects_source": False,
+        "manipulates_source": False,
+        "manipulates_state": False,
+    }
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--init', help='called when new game')
-    parser.add_argument('--iterations', help='number of iterations in game')
-    parser.add_argument('--last_opponent_move', help='last opponent move')
+    def __init__(self, alpha: float = 0.05) -> None:
+        """
+        Parameters
+        ----------
+        alpha: float
+            The significant level of p-value from chi-squared test with
+            alpha == 0.05 by default.
+        """
+        super().__init__()
+        self.alpha = alpha
+        self.opponent_is_random = False
+        self.next_random_defection_turn = None  # type: Optional[int]
 
-    args = parser.parse_args()
+[docs]    def strategy(self, opponent: Player) -> Action:
+        """This is the actual strategy"""
+        # First move
+        if not self.history:
+            return "confess"
+        # React to the opponent's last move
+        if len(self.history) < 56:
+            if opponent.history[-1] == D or len(self.history) == 50:
+                return "silent"
+            return "confess"
 
-    def __init__(self):
-         self.N = self.C = self.D = self.ci = self.di = 0
-         self.other_strategy = "confess"
+        # Check if opponent plays randomly, if so, defect for the rest of the game
+        p_value = chisquare([opponent.cooperations, opponent.defections]).pvalue
+        self.opponent_is_random = (
+            p_value >= self.alpha
+        ) or self.opponent_is_random
 
-    def __init__(opp):
-        opp.N = opp.H = opp.B = opp.hi = opp.bi
-    
+        if self.opponent_is_random:
+            return "silent"
+        if (
+            all(
+                opponent.history[i] == self.history[i - 1]
+                for i in range(1, len(self.history))
+            )
+            or opponent.history == self.history
+        ):
+            # Check if opponent plays Tit for Tat or a clone of itself.
+            if opponent.history[-1] == D:
+                return "silent"
+            return "confess"
 
-    def process_results(self, main_strategy, other_strategy):
-        pass
+        if self.next_random_defection_turn is None:
+            self.next_random_defection_turn = self._random.randint(5, 15) + len(
+                self.history
+            )
 
-"""
-"""
-
-opp_move = args.last_opponent_move
-
-
-def pick_move(self):
-# N = number of rounds
-# C is number of times ive confessed
-# D is number of times ive stayed silent
-# ci is number of times in a row ive confessed
-# di is number of times in a row ive stayed silent
-
-    if self.di > 5:
-        print("confess")
-
-    else:
-        random.randint(0,3)
-    if r == 0:
-        print("confess")
-
-    else:
-        print("silent")
-
-def process_results(self, main_strategy, other_strategy):
-    self.N += 1
-    if main_strategy == True:
-        self.C += 1
-        self.ci += 1
-        self.di = 0
-
-    elif main_strategy == False:
-        self.D += 1
-        self.di += 1
-        self.ci = 0
-        self.other_strategy = other_strategy
-        
+        if len(self.history) == self.next_random_defection_turn:
+            # resample the next defection turn
+            self.next_random_defection_turn = self._random.randint(5, 15) + len(
+                self.history
+            )
+            return "confess"
+        return "silent"
    
