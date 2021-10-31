@@ -10,15 +10,15 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-def __init__(self):
-self.N = self.C = self.D = self.ci = self.di = 0
-self.other_strategy = "confess"
+    def __init__(self):
+    self.N = self.C = self.D = self.ci = self.di = 0
+    self.other_strategy = "confess"
 
-def __init__(opp):
+    def __init__(opp):
     opp.N = opp.H = opp.B = opp.hi = opp.bi
     
 
-def process_results(self, main_strategy, other_strategy):
+    def process_results(self, main_strategy, other_strategy):
     pass
 
 """
