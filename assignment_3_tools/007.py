@@ -24,6 +24,14 @@ if __name__ == "__main__":
 """
 """
 
+opp_move = args.last_opponent_move
+
+if opp_move != None
+    print("silent")
+
+
+
+
 def pick_move(self):
 # N = number of rounds
 # C is number of times ive confessed
@@ -56,12 +64,12 @@ def process_results(self, main_strategy, other_strategy):
         self.other_strategy = other_strategy
         
     def grudge_mode(self, main_strategy, other_strategy):
-        if last_opponent_move == "confess"
+        if opp_move == "confess"
         opp.B +=1
         opp.bi += 1
         opp.hi += 0
         
-        if last_opponent_move == "silent"
+        if opp_move == "silent"
         opp.H += 1
         opp.hi += 1
         opp.bi += 0
@@ -72,4 +80,3 @@ def process_results(self, main_strategy, other_strategy):
     
         if opp.hi > 3:
            print("silent")
-    
