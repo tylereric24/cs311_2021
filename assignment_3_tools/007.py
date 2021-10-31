@@ -10,35 +10,34 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-def __init__(self):
-self.N = self.C = self.D = self.ci = self.di = 0
-self.other_strategy = "confess"
+    def __init__(self):
+         self.N = self.C = self.D = self.ci = self.di = 0
+         self.other_strategy = "confess"
 
-def __init__(opp):
-    opp.N = opp.H = opp.B = opp.hi = opp.bi
+    def __init__(opp):
+        opp.N = opp.H = opp.B = opp.hi = opp.bi
     
 
-def process_results(self, main_strategy, other_strategy):
-    pass
+    def process_results(self, main_strategy, other_strategy):
+        pass
 
 """
-
 """
 
-def pick_move
+def pick_move(self):
 # N = number of rounds
 # C is number of times ive confessed
 # D is number of times ive stayed silent
 # ci is number of times in a row ive confessed
 # di is number of times in a row ive stayed silent
 
-if self.di > 5:
-    print("confess")
+    if self.di > 5:
+        print("confess")
 
-else:
-    random.randint(0,3)
+    else:
+        random.randint(0,3)
     if r == 0:
-    return self.other_strategy
+        print("confess")
 
     else:
         print("silent")
@@ -74,5 +73,3 @@ def process_results(self, main_strategy, other_strategy):
         if opp.hi > 3:
            print("silent")
     
-
-
