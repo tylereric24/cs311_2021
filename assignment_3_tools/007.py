@@ -20,12 +20,12 @@ if __name__ == "__main__":
     def __init__(opp):
         opp.N = opp.H = opp.B = opp.hi = opp.bi
         
-    def main_strategy
+    def main_strategy(self):
         if opp_move = "confess"
         print("silent")
         
         else
-            print("confess"
+            print("confess")
     
 
     def process_results(self, main_strategy, other_strategy):
