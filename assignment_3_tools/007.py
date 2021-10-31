@@ -9,6 +9,9 @@ if __name__ == "__main__":
     parser.add_argument('--last_opponent_move', help='last opponent move')
 
     args = parser.parse_args()
+    
+    opp_move = args.last_opponent_move
+
 
     def __init__(self):
          self.N = self.C = self.D = self.ci = self.di = 0
@@ -16,6 +19,9 @@ if __name__ == "__main__":
 
     def __init__(opp):
         opp.N = opp.H = opp.B = opp.hi = opp.bi
+        
+    def main_strategy
+        if
     
 
     def process_results(self, main_strategy, other_strategy):
@@ -24,7 +30,6 @@ if __name__ == "__main__":
 """
 """
 
-opp_move = args.last_opponent_move
 
 
 def pick_move(self):
@@ -38,7 +43,7 @@ def pick_move(self):
         print("confess")
 
     else:
-        random.randint(0,3)
+       r = random.randint(0,3)
     if r == 0:
         print("confess")
 
@@ -58,3 +63,5 @@ def process_results(self, main_strategy, other_strategy):
         self.ci = 0
         self.other_strategy = other_strategy
         
+ if self.ci = 5
+    print(silent)
