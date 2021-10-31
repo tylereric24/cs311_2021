@@ -24,7 +24,7 @@ if __name__ == "__main__":
 """
 """
 
-
+opp_move = args.last_opponent_move
 
 
 def pick_move(self):
