@@ -8,7 +8,7 @@ if __name__ == "__main__":
     parser.add_argument('--iterations', help='number of iterations in game')
     parser.add_argument('--last_opponent_move', help='last opponent move')
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
 
     def __init__(self):
          self.N = self.C = self.D = self.ci = self.di = 0
