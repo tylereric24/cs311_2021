@@ -58,20 +58,4 @@ def process_results(self, main_strategy, other_strategy):
         self.ci = 0
         self.other_strategy = other_strategy
         
-    def grudge_mode(self, main_strategy, other_strategy):
-        if opp_move == "confess"
-        opp.B +=1
-        opp.bi += 1
-        opp.hi += 0
-        
-        if opp_move == "silent"
-        opp.H += 1
-        opp.hi += 1
-        opp.bi += 0
-        
-        if opp.bi > 4:
-           print("confess")
-       
-    
-        if opp.hi > 3:
-           print("silent")
+   
