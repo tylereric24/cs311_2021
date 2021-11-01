@@ -14,12 +14,12 @@ parameter_storage = "parameter_storage.json"
 parameters = {
    
     "anger": True,
-    "grudgelength": 2,
+    "grudgelength": 4,
     "spill_the_beans": True,
-    "spill_the_beans_odds": 100,
+    "spill_the_beans_odds": 33,
     "be_petty": True,
     "petty_counter": 1,
-    "petty_cap": 5,
+    "petty_cap": 3,
     "confess_on_final_round": True,
     "iterations": 0,
     "chip_counter": 0
@@ -127,9 +127,9 @@ if __name__ == "__main__":
     else:
 
         
-        if parameters["iterations"] < 25:
+        if parameters["iterations"] < 15:
 
-                r  = random.randint(0,3)
+                r  = random.randint(0,5)
 
                 if r == 0:
                     print("confess")
