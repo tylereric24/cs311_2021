@@ -13,7 +13,7 @@ parameter_storage = "parameter_storage.json"
 
 parameters = {
    
-    "be_angry": True,
+    "anger": True,
     "grudgelength": 2,
     "spill_the_beans": True,
     "spill_the_beans_odds": 100,
@@ -106,10 +106,10 @@ if __name__ == "__main__":
     if opponents_last_move == "confess":
 
        
-        if parameters["be_angry"]:
+        if parameters["anger"]:
 
            
-            parameters["chip_counter"] = parameters["grudgelength"]
+            parameters["chip_counter"] < parameters["grudgelength"]
             print("confess")
 
        
@@ -129,14 +129,14 @@ if __name__ == "__main__":
         
         if parameters["iterations"] < 25:
 
-            r == random.randint(0,3)
+                r  = random.randint(0,3)
 
-            if r == 0:
-                print("confess")
+                if r == 0:
+                    print("confess")
                   
     
-      if parameters["iterations"] > 75
-         print("silent")
+                if parameters["iterations"] > 75:
+                    print("silent")
     
        
         else:
