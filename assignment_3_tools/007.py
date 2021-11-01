@@ -7,19 +7,7 @@ from os.path import exists
 opp_moves_history = "opp_moves_history.json"
 parameter_storage = "parameter_storage.json"
 
-if __name__ == "__main__":
 
-    
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--init', help='called when new game')
-    parser.add_argument('--iterations', help='number of iterations in game')
-    parser.add_argument('--last_opponent_move', help='last opponent move')
-    args = parser.parse_args()
-
-   
-    is_new_game = args.init
-    iterations = args.iterations
-    opponents_last_move = args.last_opponent_move
 
 
 parameters = {
@@ -72,7 +60,19 @@ def print_data():
     print(opponent_history)
     print("\n")
 
+if __name__ == "__main__":
 
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--init', help='called when new game')
+    parser.add_argument('--iterations', help='number of iterations in game')
+    parser.add_argument('--last_opponent_move', help='last opponent move')
+    args = parser.parse_args()
+
+   
+    is_new_game = args.init
+    iterations = args.iterations
+    opponents_last_move = args.last_opponent_move
 
 
 
@@ -126,7 +126,7 @@ def print_data():
     else:
 
         
-        if parameters["iterations"] < 50:
+        if parameters["iterations"] 50:
 
             r == random.randint(0,3)
 
