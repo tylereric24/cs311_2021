@@ -18,6 +18,7 @@ parameters = {
     "spill_the_beans": True,
     "spill_the_beans_odds": 200,
     "be_petty": True,
+    "nuclear": 0,
     "petty_counter": 1,
     "petty_cap": 3,
     "iterations": 0,
@@ -103,6 +104,7 @@ if __name__ == "__main__":
 
     
     if opponents_last_move == "confess":
+        parameters["nuclear"] += 1
 
        
         if parameters["anger"]:
@@ -126,7 +128,7 @@ if __name__ == "__main__":
     else:
 
         
-        if parameters["iterations"] < 15:
+        if parameters["iterations"] < 3:
 
                 r  = random.randint(0,5)
 
@@ -134,7 +136,7 @@ if __name__ == "__main__":
                     print("confess")
                   
     
-                if parameters["iterations"] > 95:
+                if parameters["iterations"] > 97:
                     b = random.randint(1,10)
                     if b == 6:
                         print("confess")
@@ -160,10 +162,10 @@ if __name__ == "__main__":
                         t = random.randint(0,10)
                       
                         if t == 6:
-                            print("silent")
+                            print("confess")
                                          
                         else:
-                            print("confess")
+                            print("silent")
 
                     
                     except ValueError:
