@@ -135,8 +135,10 @@ if __name__ == "__main__":
                     print("confess")
                   
     
-                if parameters["iterations"] > 75:
-                    print("silent")
+                if parameters["iterations"] > 95:
+                    b = random.randint(1,10)
+                    if b == 6:
+                        print("confess")
     
        
         else:
