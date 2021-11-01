@@ -20,10 +20,13 @@ if __name__ == "__main__":
     iterations = args.iterations
     opponents_last_move = args.last_opponent_move
 
+
+
 parameters = {
+   
     "be_angry": True,
     "grudgelength": 2,
-    "be_petty": False,
+    "be_petty": True,
     "petty_counter": 1,
     "petty_cap": 5,
     "spill_the_beans": True,
@@ -31,9 +34,11 @@ parameters = {
     "iterations": 0,
     "chip_counter": 0
 }
+
 opponent_history = {
     "history": ""
 }
+
 def save_file(file):
 
     if file == parameter_storage:
@@ -43,6 +48,8 @@ def save_file(file):
         with open(opp_moves_history, "w") as f:
             json.dump(opponent_history, f)
 
+
+
 def load_file(file):
 
     
@@ -50,6 +57,8 @@ def load_file(file):
         save_file(file)
     with open(file) as f:
         return json.load(f)
+
+
 
 def print_data():
 
@@ -61,6 +70,12 @@ def print_data():
     print(parameters)
 
     
+
+
+
+
+
+   
     if is_new_game is not None:
         save_file(parameter_storage)
         save_file(opp_moves_history)
@@ -97,17 +112,18 @@ def print_data():
 
        
         else:
-
-            if opponents_last_move == "silent":
-                print("confess")
+            print("confess")
 
        
         if parameters["be_petty"]:
 
-            if parameters["spill_the_beans_odds"] <= parameters["petty_cap"]:
+            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
 
                 parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
 
+
+
+       
         else:
 
            
@@ -141,11 +157,9 @@ def print_data():
                 
                 else:
 
-                    random.rantint(0,7)
-
-                    if r == 3:
-                        print("silent")
+                    print("silent")
 
    
     save_file(parameter_storage)
     save_file(opp_moves_history)
+
