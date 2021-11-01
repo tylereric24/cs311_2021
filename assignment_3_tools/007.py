@@ -1,71 +1,165 @@
 import argparse
 import random
 import json
+from os.path import exists
+
+
+opp_moves_history = "opp_moves_history.json"
+parameter_storage = "parameter_storage.json"
+
+
+parameters = {
+   
+    "be_angry": True,
+    "grudgelength": 2,
+    "spill_the_beans": True,
+    "spill_the_beans_odds": 33,
+    "be_petty": True,
+    "petty_counter": 2,
+    "petty_cap": 6,
+    "confess_on_final_round": True,
+    "iterations": 0,
+    "chip_counter": 0
+}
+
+opponent_history = {
+    "history": ""
+}
+
+def save_file(file):
+
+    if file == parameter_storage:
+        with open(parameter_storage, "w") as f:
+            json.dump(parameters, f)
+    elif file == opp_moves_history:
+        with open(opp_moves_history, "w") as f:
+            json.dump(opponent_history, f)
+
+
+
+def load_file(file):
+
+    
+    if not exists(file):
+        save_file(file)
+    with open(file) as f:
+        return json.load(f)
+
+
+
+def print_data():
+
+    print("\n\n\n-------------- PARAM FILE --------------")
+    print(parameters)
+
+    print("\n-------------- OPPONENT HISTORY FILE --------------")
+    print(opponent_history)
+    print("\n\n\n")
+
+
 
 if __name__ == "__main__":
+
+    
     parser = argparse.ArgumentParser()
     parser.add_argument('--init', help='called when new game')
     parser.add_argument('--iterations', help='number of iterations in game')
     parser.add_argument('--last_opponent_move', help='last opponent move')
-
     args = parser.parse_args()
-    
-    opp_move = args.last_opponent_move
 
+   
+    is_new_game = args.init
+    iterations = args.iterations
+    opponents_last_move = args.last_opponent_move
 
-    def __init__(self):
-         self.N = self.C = self.D = self.ci = self.di = 0
-         self.other_strategy = "confess"
+   
+    if is_new_game is not None:
+        save_file(parameter_storage)
+        save_file(opp_moves_history)
+    else:
+       
+        parameters = load_file(parameter_storage)
+        opponent_history = load_file(opp_moves_history)
 
-    def __init__(opp):
-        opp.N = opp.H = opp.B = opp.hi = opp.bi
-        
-    def main_strategy(self):
-        if opp_move = "confess"
-        print("silent")
-        
-        else
-            print("confess")
-    
-
-    def process_results(self, main_strategy, other_strategy):
+   
+    try:
+        opponent_history["history"] += opponents_last_move[0]
+    except TypeError:
         pass
 
-"""
-"""
+    
+    save_file(opp_moves_history)
 
+   
+    if iterations is not None:
+        parameters["iterations"] = int(iterations)
 
+    
+    parameters["iterations"] -= 1
 
-def pick_move(self):
-# N = number of rounds
-# C is number of times ive confessed
-# D is number of times ive stayed silent
-# ci is number of times in a row ive confessed
-# di is number of times in a row ive stayed silent
+    
+    if opponents_last_move == "confess":
 
-    if self.di > 5:
-        print("confess")
+       
+        if parameters["be_angry"]:
 
+           
+            parameters["chip_counter"] = parameters["grudgelength"]
+            print("confess")
+
+       
+        else:
+            print("silent")
+
+       
+        if parameters["be_petty"]:
+
+            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
+
+                parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
+
+   
     else:
-       r = random.randint(0,3)
-    if r == 0:
-        print("confess")
 
-    else:
-        print("silent")
-
-def process_results(self, main_strategy, other_strategy):
-    self.N += 1
-    if main_strategy == True:
-        self.C += 1
-        self.ci += 1
-        self.di = 0
-
-    elif main_strategy == False:
-        self.D += 1
-        self.di += 1
-        self.ci = 0
-        self.other_strategy = other_strategy
         
- if self.ci = 5
-    print(silent)
+        if parameters["iterations"] == 1:
+
+            print("confess")
+
+       
+        else:
+
+           
+            if parameters["chip_counter"] != 0:
+
+               
+                print("confess")
+                parameters["chip_counter"] -= 1
+
+           
+            else:
+
+                
+                if parameters["spill_the_beans"]:
+
+                   
+                    try:
+
+                        if random.randint(0, parameters["spill_the_beans_odds"]) == 0:
+                            print("confess")
+                        else:
+                            print("silent")
+
+                    
+                    except ValueError:
+
+                        print("silent")
+
+                
+                else:
+
+                    print("silent")
+
+   
+    save_file(parameter_storage)
+    save_file(opp_moves_history)
