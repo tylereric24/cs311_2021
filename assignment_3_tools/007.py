@@ -3,60 +3,8 @@ import random
 import json
 from os.path import exists
 
-
-opp_moves_history = "opp_moves_history.json"
 parameter_storage = "parameter_storage.json"
-
-
-parameters = {
-   
-    "be_angry": True,
-    "grudgelength": 2,
-    "spill_the_beans": True,
-    "spill_the_beans_odds": 33,
-    "be_petty": True,
-    "petty_counter": 2,
-    "petty_cap": 6,
-    "confess_on_final_round": True,
-    "iterations": 0,
-    "chip_counter": 0
-}
-
-opponent_history = {
-    "history": ""
-}
-
-def save_file(file):
-
-    if file == parameter_storage:
-        with open(parameter_storage, "w") as f:
-            json.dump(parameters, f)
-    elif file == opp_moves_history:
-        with open(opp_moves_history, "w") as f:
-            json.dump(opponent_history, f)
-
-
-
-def load_file(file):
-
-    
-    if not exists(file):
-        save_file(file)
-    with open(file) as f:
-        return json.load(f)
-
-
-
-def print_data():
-
-    print("\n\n\n-------------- PARAM FILE --------------")
-    print(parameters)
-
-    print("\n-------------- OPPONENT HISTORY FILE --------------")
-    print(opponent_history)
-    print("\n\n\n")
-
-
+opp_moves_history = "opp_moves_history.json"
 
 if __name__ == "__main__":
 
@@ -72,7 +20,47 @@ if __name__ == "__main__":
     iterations = args.iterations
     opponents_last_move = args.last_opponent_move
 
-   
+parameters = {
+    "be_angry": True,
+    "grudgelength": 2,
+    "be_petty": False,
+    "petty_counter": 1,
+    "petty_cap": 5,
+    "spill_the_beans": True,
+    "spill_the_beans_odds": 33,
+    "iterations": 0,
+    "chip_counter": 0
+}
+opponent_history = {
+    "history": ""
+}
+def save_file(file):
+
+    if file == parameter_storage:
+        with open(parameter_storage, "w") as f:
+            json.dump(parameters, f)
+    elif file == opp_moves_history:
+        with open(opp_moves_history, "w") as f:
+            json.dump(opponent_history, f)
+
+def load_file(file):
+
+    
+    if not exists(file):
+        save_file(file)
+    with open(file) as f:
+        return json.load(f)
+
+def print_data():
+
+    print("\n-OPP HISTORY--")
+    print(opponent_history)
+    print("\n\n\n")
+
+    print("\n\n\n--Parameters--")
+    print(parameters)
+
+    
     if is_new_game is not None:
         save_file(parameter_storage)
         save_file(opp_moves_history)
@@ -105,28 +93,21 @@ if __name__ == "__main__":
 
            
             parameters["chip_counter"] = parameters["grudgelength"]
-            print("confess")
+            print("silent")
 
        
         else:
-            print("silent")
+
+            if opponents_last_move == "silent":
+                print("confess")
 
        
         if parameters["be_petty"]:
 
-            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
+            if parameters["spill_the_beans_odds"] <= parameters["petty_cap"]:
 
                 parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
 
-   
-    else:
-
-        
-        if parameters["iterations"] == 1:
-
-            print("confess")
-
-       
         else:
 
            
@@ -145,7 +126,9 @@ if __name__ == "__main__":
                    
                     try:
 
-                        if random.randint(0, parameters["spill_the_beans_odds"]) == 0:
+                        r = random.randint(0,3)
+
+                        if r == 0:
                             print("confess")
                         else:
                             print("silent")
@@ -158,7 +141,10 @@ if __name__ == "__main__":
                 
                 else:
 
-                    print("silent")
+                    random.rantint(0,7)
+
+                    if r == 3:
+                        print("silent")
 
    
     save_file(parameter_storage)
