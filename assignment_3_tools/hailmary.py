@@ -149,9 +149,7 @@ if __name__ == "__main__":
 
                 
                 if parameters["spill_the_beans"]:
-
-                   
-                    try:
+                                                      
                         t = random.randint(0,10)
                       
                         if t == 0:
