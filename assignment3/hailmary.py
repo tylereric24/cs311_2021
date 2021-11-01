@@ -121,7 +121,7 @@ if __name__ == "__main__":
     
                 if parameters["iterations"] > 97:
                     b = random.randint(1,10)
-                    if b == 6:
+                    if b == 10:
                         print("confess")
            
         else:
@@ -143,7 +143,7 @@ if __name__ == "__main__":
                     try:
                         t = random.randint(0,10)
                       
-                        if t == 6:
+                        if t == 0:
                             print("confess")
                                          
                         else:
