@@ -126,7 +126,7 @@ def print_data():
     else:
 
         
-        if parameters["iterations"] == /5:
+        if parameters["iterations"] == < 50:
 
             r == random.randint(0,3)
 
