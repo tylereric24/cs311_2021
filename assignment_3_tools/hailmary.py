@@ -108,12 +108,12 @@ if __name__ == "__main__":
         if parameters["anger"]:
 
            
-            parameters["chip_counter"] > parameters["grudgelength"]
-            print("silent")
+            parameters["chip_counter"] < parameters["grudgelength"]
+            print("confess")
 
        
         else:
-            print("confess")
+            print("silent")
 
        
         if parameters["be_petty"]:
@@ -126,9 +126,9 @@ if __name__ == "__main__":
     else:
 
         
-        if parameters["iterations"] < 5:
+        if parameters["iterations"] < 15:
 
-                r  = random.randint(0,50)
+                r  = random.randint(0,5)
 
                 if r == 0:
                     print("confess")
@@ -137,7 +137,7 @@ if __name__ == "__main__":
                 if parameters["iterations"] > 95:
                     b = random.randint(1,10)
                     if b == 6:
-                        print("silent")
+                        print("confess")
     
        
         else:
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
                
                 print("confess")
-                parameters["chip_counter"] -= 2
+                parameters["chip_counter"] -= 1
 
            
             else:
@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
                    
                     try:
-                        t = random.randint((0,10) * 15 / 2)
+                        t = random.randint(0,10)
                       
                         if t == 6:
                             print("silent")
