@@ -126,7 +126,7 @@ if __name__ == "__main__":
     else:
 
         
-        if parameters["iterations"] 50:
+        if parameters["iterations"] == 50:
 
             r == random.randint(0,3)
 
