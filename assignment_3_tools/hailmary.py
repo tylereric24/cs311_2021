@@ -11,7 +11,7 @@ parameters = {
     "anger": True,
     "grudgelength": 4,
     "spill_the_beans": True,
-    "spill_the_beans_odds": 200,
+    "spill_the_beans_odds": 50,
     "be_petty": True,
     "nuclear": 0,
     "petty_counter": 1,
@@ -105,10 +105,10 @@ if __name__ == "__main__":
        
         if parameters["be_petty"]:
 
-            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
-               print("confess")
+            if parameters["spill_the_beans_odds"] <= parameters["petty_cap"]:
+               print("silent")
 
-            if parameters["spill_the_beans_odds"] <= parameters["petty_counter"]:
+            if parameters["spill_the_beans_odds"] >= parameters["petty_counter"]:
                 print("confess")
    
     else:
@@ -165,4 +165,3 @@ if __name__ == "__main__":
    
     save_file(parameter_storage)
     save_file(opp_moves_history)
-
