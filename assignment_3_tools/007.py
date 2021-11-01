@@ -3,34 +3,21 @@ import random
 import json
 from os.path import exists
 
-parameter_storage = "parameter_storage.json"
+
 opp_moves_history = "opp_moves_history.json"
-
-if __name__ == "__main__":
-
-    
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--init', help='called when new game')
-    parser.add_argument('--iterations', help='number of iterations in game')
-    parser.add_argument('--last_opponent_move', help='last opponent move')
-    args = parser.parse_args()
-
-   
-    is_new_game = args.init
-    iterations = args.iterations
-    opponents_last_move = args.last_opponent_move
-
+parameter_storage = "parameter_storage.json"
 
 
 parameters = {
    
     "be_angry": True,
     "grudgelength": 2,
+    "spill_the_beans": True,
+    "spill_the_beans_odds": 100,
     "be_petty": True,
     "petty_counter": 1,
     "petty_cap": 5,
-    "spill_the_beans": True,
-    "spill_the_beans_odds": 33,
+    "confess_on_final_round": True,
     "iterations": 0,
     "chip_counter": 0
 }
@@ -38,6 +25,8 @@ parameters = {
 opponent_history = {
     "history": ""
 }
+
+
 
 def save_file(file):
 
@@ -62,18 +51,28 @@ def load_file(file):
 
 def print_data():
 
-    print("\n-OPP HISTORY--")
+    print("\n\n\n-------------- PARAM FILE --------------")
+    print(parameters)
+
+    print("\n-------------- OPPONENT HISTORY FILE --------------")
     print(opponent_history)
     print("\n\n\n")
 
-    print("\n\n\n--Parameters--")
-    print(parameters)
+
+
+if __name__ == "__main__":
 
     
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--init', help='called when new game')
+    parser.add_argument('--iterations', help='number of iterations in game')
+    parser.add_argument('--last_opponent_move', help='last opponent move')
+    args = parser.parse_args()
 
-
-
-
+   
+    is_new_game = args.init
+    iterations = args.iterations
+    opponents_last_move = args.last_opponent_move
 
    
     if is_new_game is not None:
@@ -108,11 +107,11 @@ def print_data():
 
            
             parameters["chip_counter"] = parameters["grudgelength"]
-            print("silent")
+            print("confess")
 
        
         else:
-            print("confess")
+            print("silent")
 
        
         if parameters["be_petty"]:
@@ -121,7 +120,13 @@ def print_data():
 
                 parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
 
+   
+    else:
 
+        
+        if parameters["iterations"] == 1:
+
+            print("confess")
 
        
         else:
@@ -142,9 +147,7 @@ def print_data():
                    
                     try:
 
-                        r = random.randint(0,3)
-
-                        if r == 0:
+                        if random.randint(0, parameters["spill_the_beans_odds"]) == 0:
                             print("confess")
                         else:
                             print("silent")
