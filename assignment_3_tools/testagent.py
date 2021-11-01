@@ -1,168 +1,79 @@
 import argparse
 import random
 import json
-from os.path import exists
 
-
-opp_moves_history = "opp_moves_history.json"
-parameter_storage = "parameter_storage.json"
-
-parameters = {
-   
-    "anger": True,
-    "grudgelength": 4,
-    "spill_the_beans": True,
-    "spill_the_beans_odds": 200,
-    "be_petty": True,
-    "nuclear": 0,
-    "petty_counter": 1,
-    "petty_cap": 3,
-    "iterations": 0,
-    "chip_counter": 0
-}
-
-opponent_history = {
-    "history": ""
-}
-
-
-
-def save_file(file):
-
-    if file == parameter_storage:
-        with open(parameter_storage, "w") as f:
-            json.dump(parameters, f)
-    elif file == opp_moves_history:
-        with open(opp_moves_history, "w") as f:
-            json.dump(opponent_history, f)
-
-def load_file(file):
-  
-    if not exists(file):
-        save_file(file)
-    with open(file) as f:
-        return json.load(f)
-
-def print_data():
-
-    print("\nParam File")
-    print(parameters)
-
-    print("\n-Opp History-")
-    print(opponent_history)
-    print("\n")
 
 if __name__ == "__main__":
-
-    
     parser = argparse.ArgumentParser()
     parser.add_argument('--init', help='called when new game')
     parser.add_argument('--iterations', help='number of iterations in game')
     parser.add_argument('--last_opponent_move', help='last opponent move')
+
     args = parser.parse_args()
 
-   
-    is_new_game = args.init
-    iterations = args.iterations
-    opponents_last_move = args.last_opponent_move
-  
-    if is_new_game is not None:
-        save_file(parameter_storage)
-        save_file(opp_moves_history)
-    else:
-       
-        parameters = load_file(parameter_storage)
-        opponent_history = load_file(opp_moves_history)
-
-   
-    try:
-        opponent_history["history"] += opponents_last_move[0]
-    except TypeError:
+    num_moves = 0
+    past_moves = []
+    #To make sure that the file exists
+    with open("grievances.json", "a") as f: 
         pass
+    #Reads past opponent moves into past_moves list
+    with open("grievances.json", "r") as openfile: 
+        try:
+            past_moves = json.load(openfile)
+            num_moves = (past_moves.pop())
+        except:
+            past_moves = []
 
-    
-    save_file(opp_moves_history)
+    #Keeps track of what iteration we're in
+    num_moves += 1
+    #Loads last move argument into last_move
+    last_move = args.last_opponent_move 
 
-   
-    if iterations is not None:
-        parameters["iterations"] = int(iterations)
+    #Appends current iteration's past move
+    if last_move == 'silent' or last_move == 'confess':
+        past_moves.insert(0, last_move)
 
-    
-    parameters["iterations"] -= 1
+    #Keeps total recorded moves under a value
+    if len(past_moves) > 5:
+    	past_moves.pop()
 
-    
-    if opponents_last_move == "confess":
-        parameters["nuclear"] += 1
+    ######################################################################### Work in here
+    decision = 'silent' #random.choice(['confess', 'silent'])
+    if num_moves > 1 and num_moves < 100:
+        #Insert Decision making here
+        num_silent = 0
+        num_confess = 0
+        for i in past_moves:
+            if i == 'silent':
+                num_silent += 1
+            elif i == 'confess':
+                num_confess += 1
 
-       
-        if parameters["nuclear"] > 10:
-
-           
-            parameters["chip_counter"] < parameters["grudgelength"]
-            print("confess")
-
-       
+	#This is where the magic happens
+        if num_confess > num_silent:
+            decision = 'confess'
         else:
-            print("silent")
+            decision = 'silent'
 
-       
-        if parameters["be_petty"]:
+    elif num_moves > 99:
+        decision = 'confess'
 
-            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
+    #########################################################################
 
-                parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
-   
+    #Saves number of moves into the list to be saved into the json for use in next iteration
+    if num_moves < 100:
+        past_moves.append(num_moves)
     else:
+        #If over iteraetion limit, wipes the past_moves, Functions to make sure nothing carries over if the grievances file is not deleted between tournament iterations
+        past_moves = []
 
-        
-        if parameters["iterations"] < 3:
+    #Creates json format to be written
+    save_moves = json.dumps(past_moves) 
 
-                r  = random.randint(0,5)
+    #Saves the past moves list into a file for use in next iteration
+    with open("grievances.json", "w") as outfile:
+        outfile.write(save_moves)
 
-                if r == 0:
-                    print("confess")
-                  
+    #Prints output decision
+    print(decision) #decision being the string output, either 'confess' or 'silent' based on algorithm
     
-                if parameters["iterations"] > 97:
-                    b = random.randint(1,10)
-                    if b == 6:
-                        print("confess")
-           
-        else:
-
-           
-            if parameters["chip_counter"] != 0:
-
-               
-                print("confess")
-                parameters["chip_counter"] -= 1
-
-           
-            else:
-
-                
-                if parameters["spill_the_beans"]:
-
-                   
-                    try:
-                        t = random.randint(0,10)
-                      
-                        if t == 6:
-                            print("confess")
-                                         
-                        else:
-                            print("silent")
-
-                    
-                    except ValueError:
-
-                        print("silent")
-
-                
-                else:
-
-                    print("silent")
-
-   
-    save_file(parameter_storage)
-    save_file(opp_moves_history)
