@@ -107,7 +107,7 @@ if __name__ == "__main__":
             if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
 
                 parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
-                  print("confess")
+                print("confess")
    
     else:
 
@@ -163,3 +163,4 @@ if __name__ == "__main__":
    
     save_file(parameter_storage)
     save_file(opp_moves_history)
+
