@@ -16,11 +16,10 @@ parameters = {
     "anger": True,
     "grudgelength": 4,
     "spill_the_beans": True,
-    "spill_the_beans_odds": 33,
+    "spill_the_beans_odds": 200,
     "be_petty": True,
     "petty_counter": 1,
     "petty_cap": 3,
-    "confess_on_final_round": True,
     "iterations": 0,
     "chip_counter": 0
 }
