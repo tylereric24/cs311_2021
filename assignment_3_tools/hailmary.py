@@ -95,7 +95,7 @@ if __name__ == "__main__":
          print("confess")
 
            
-            parameters["chip_counter"] < parameters["grudgelength"]
+        if parameters["chip_counter"] < parameters["grudgelength"]:
             print("confess")
 
        
@@ -105,10 +105,10 @@ if __name__ == "__main__":
        
         if parameters["be_petty"]:
 
-            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]
+            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
                print("confess")
 
-             if parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
+            if parameters["spill_the_beans_odds"] <= parameters["petty_counter"]:
                 print("confess")
    
     else:
