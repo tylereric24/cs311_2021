@@ -3,7 +3,6 @@ import random
 import json
 from os.path import exists
 
-
 opp_moves_history = "opp_moves_history.json"
 parameter_storage = "parameter_storage.json"
 
@@ -47,7 +46,6 @@ def print_data():
 
     print("\nParameter File")
     print(parameters)
-
     print("\n-Opp History-")
     print(opponent_history)
     print("\n")
@@ -60,7 +58,6 @@ if __name__ == "__main__":
     parser.add_argument('--iterations', help='number of iterations in game')
     parser.add_argument('--last_opponent_move', help='last opponent move')
     args = parser.parse_args()
-
    
     is_new_game = args.init
     iterations = args.iterations
@@ -73,7 +70,6 @@ if __name__ == "__main__":
        
         parameters = load_file(parameter_storage)
         opponent_history = load_file(opp_moves_history)
-
    
     try:
         opponent_history["history"] += opponents_last_move[0]
