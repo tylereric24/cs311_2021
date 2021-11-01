@@ -11,7 +11,7 @@ parameters = {
     "anger": True,
     "grudgelength": 4,
     "spill_the_beans": True,
-    "spill_the_beans_odds": 50,
+    "spill_the_beans_odds": 200,
     "be_petty": True,
     "nuclear": 0,
     "petty_counter": 1,
@@ -79,23 +79,15 @@ if __name__ == "__main__":
     
     save_file(opp_moves_history)
 
-   
-    if iterations is not None:
-        parameters["iterations"] = int(iterations)
-
-    
-    parameters["iterations"] -= 1
-
     
     if opponents_last_move == "confess":
         parameters["nuclear"] += 1
 
        
         if parameters["nuclear"] > 10:
-         print("confess")
 
            
-        if parameters["chip_counter"] < parameters["grudgelength"]:
+            parameters["chip_counter"] < parameters["grudgelength"]
             print("confess")
 
        
@@ -105,16 +97,14 @@ if __name__ == "__main__":
        
         if parameters["be_petty"]:
 
-            if parameters["spill_the_beans_odds"] <= parameters["petty_cap"]:
-               print("silent")
+            if parameters["spill_the_beans_odds"] >= parameters["petty_cap"]:
 
-            if parameters["spill_the_beans_odds"] >= parameters["petty_counter"]:
-                print("confess")
+                parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
    
     else:
 
         
-        if parameters["iterations"] < 3:
+        if parameters["petty_counter"] < 3:
 
                 r  = random.randint(0,5)
 
@@ -122,7 +112,7 @@ if __name__ == "__main__":
                     print("confess")
                   
     
-                if parameters["iterations"] > 97:
+                if parameters["petty_counter"] > 10:
                     b = random.randint(1,10)
                     if b == 10:
                         print("confess")
@@ -141,8 +131,9 @@ if __name__ == "__main__":
 
                 
                 if parameters["spill_the_beans"]:
-                
-                
+
+                   
+                    try:
                         t = random.randint(0,10)
                       
                         if t == 0:
@@ -152,7 +143,9 @@ if __name__ == "__main__":
                             print("silent")
 
                     
-                        
+                    except ValueError:
+
+                        print("silent")
 
                 
                 else:
