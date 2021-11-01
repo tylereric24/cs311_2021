@@ -45,7 +45,7 @@ def load_file(file):
 
 def print_data():
 
-    print("\nParam File")
+    print("\nParameter File")
     print(parameters)
 
     print("\n-Opp History-")
