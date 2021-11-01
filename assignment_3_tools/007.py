@@ -3,9 +3,9 @@ import random
 import json
 from os.path import exists
 
-
-opp_moves_history = "opp_moves_history.json"
 parameter_storage = "parameter_storage.json"
+opp_moves_history = "opp_moves_history.json"
+
 
 
 parameters = {
@@ -13,11 +13,10 @@ parameters = {
     "be_angry": True,
     "grudgelength": 2,
     "spill_the_beans": True,
-    "spill_the_beans_odds": 100,
+    "spill_the_beans_odds": 33,
     "be_petty": True,
     "petty_counter": 1,
     "petty_cap": 5,
-    "confess_on_final_round": True,
     "iterations": 0,
     "chip_counter": 0
 }
@@ -25,8 +24,6 @@ parameters = {
 opponent_history = {
     "history": ""
 }
-
-
 
 def save_file(file):
 
@@ -51,10 +48,10 @@ def load_file(file):
 
 def print_data():
 
-    print("\n\n\n-------------- PARAM FILE --------------")
+    print("\n\n\n--Parameters--")
     print(parameters)
 
-    print("\n-------------- OPPONENT HISTORY FILE --------------")
+    print("\n-OPP HISTORY--")
     print(opponent_history)
     print("\n\n\n")
 
@@ -120,13 +117,7 @@ if __name__ == "__main__":
 
                 parameters["spill_the_beans_odds"] -= parameters["petty_counter"]
 
-   
-    else:
 
-        
-        if parameters["iterations"] == 1:
-
-            print("confess")
 
        
         else:
@@ -147,7 +138,9 @@ if __name__ == "__main__":
                    
                     try:
 
-                        if random.randint(0, parameters["spill_the_beans_odds"]) == 0:
+                        r = random.randint(0,3)
+
+                        if r == 0:
                             print("confess")
                         else:
                             print("silent")
