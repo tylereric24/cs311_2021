@@ -7,10 +7,6 @@ from os.path import exists
 opp_moves_history = "opp_moves_history.json"
 parameter_storage = "parameter_storage.json"
 
-
-
-
-
 parameters = {
    
     "anger": True,
@@ -39,17 +35,12 @@ def save_file(file):
         with open(opp_moves_history, "w") as f:
             json.dump(opponent_history, f)
 
-
-
 def load_file(file):
-
-    
+   
     if not exists(file):
         save_file(file)
     with open(file) as f:
         return json.load(f)
-
-
 
 def print_data():
 
@@ -74,9 +65,6 @@ if __name__ == "__main__":
     iterations = args.iterations
     opponents_last_move = args.last_opponent_move
 
-
-
-   
     if is_new_game is not None:
         save_file(parameter_storage)
         save_file(opp_moves_history)
@@ -157,9 +145,7 @@ if __name__ == "__main__":
 
                    
                     try:
-                        t = random.randint(0,10)
-                      
-                        if t == 6:
+                        t = random.randint(0,parameters["spill_the_beans_odds"]) == 10:                   
                             print("silent")
                                          
                         else:
