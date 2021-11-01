@@ -107,7 +107,7 @@ if __name__ == "__main__":
         parameters["nuclear"] += 1
 
        
-        if parameters["anger"]:
+        if parameters["nuclear"] > 10:
 
            
             parameters["chip_counter"] < parameters["grudgelength"]
