@@ -126,7 +126,7 @@ if __name__ == "__main__":
     else:
 
         
-        if parameters["iterations"] < 5:
+        if parameters["iterations"] < 15:
 
                 r  = random.randint(0,5)
 
@@ -137,7 +137,7 @@ if __name__ == "__main__":
                 if parameters["iterations"] > 95:
                     b = random.randint(1,10)
                     if b == 6:
-                        print("silent")
+                        print("confess")
     
        
         else:
@@ -162,7 +162,8 @@ if __name__ == "__main__":
                         if t == 6:
                             print("silent")
                                          
-                    
+                        else:
+                            print("confess")
 
                     
                     except ValueError:
