@@ -153,10 +153,11 @@ if __name__ == "__main__":
 
                    
                     try:
-                        t = random.randint(0,1,2,3,4,5,6,7,8,9,10)
-                        
-                        if t == 0,2,4,6,8,10:
+                        t = random.randint(0,10)
+                      
+                        if t == 6:
                             print("confess")
+                                         
                         else:
                             print("silent")
 
