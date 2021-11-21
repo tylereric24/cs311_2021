@@ -1,6 +1,9 @@
 import random
 import string
 
+RANDOM_NODE_NAMES = ["Kona", "Riley", "Nahla", "Otis", "Templeton", "Gilligan", "Swiss", "Cooper", "Murphy", "Bristol", "Brady", "Stitch", "Charlie", "Diesel",
+"Benji", "Archie", "Chi"]
+
 NODE_PER_LAYER = [4,3,2] 
 class Node:
   def __init__(self):
