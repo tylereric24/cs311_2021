@@ -9,7 +9,7 @@ class Node:
   def __init__(self):
     self.children = [] 
     self.weight = [] 
-    self.name = ''.join([random.RANDOM_NODE_NAMES(random.randrange(len(RANDOM_NODE_NAMES))])
+    self.name = ''.join([random.RANDOM_NODE_NAMES[random.randrange(len(RANDOM_NODE_NAMES)]))
     
   def make_children(self, current_layer_number, node_per_layer_map):
     
