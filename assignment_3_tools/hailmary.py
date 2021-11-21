@@ -5,7 +5,7 @@ from textwrap import indent
 
 NODE_COUNT_PER_LAYER = [4,3,2]
 
-def class Node:
+class Node:
     def __init__(self):
         self.children = [] #connection to children
         self.weight = [] #weight of connection to children
