@@ -1,151 +1,74 @@
-import argparse
 import random
-import json
-from os.path import exists
+import string
+import itertools
+from textwrap import indent
 
-opp_moves_history = "opp_moves_history.json"
-parameter_storage = "parameter_storage.json"
+NODE_COUNT_PER_LAYER = [4,3,2]
 
-parameters = {
-   
-    "anger": True,
-    "grudgelength": 4,
-    "spill_the_beans": True,
-    "spill_the_beans_odds": 200,
-    "be_petty": True,
-    "nuclear": 0,
-    "petty_counter": 1,
-    "petty_cap": 3,
-    "iterations": 0,
-    "chip_counter": 0
-}
+def class Node:
+    def __init__(self):
+        self.children = [] #connection to children
+        self.weight = [] #weight of connection to children
 
-opponent_history = {
-    "history": ""
-}
+        self.node_name = ''
+        random_letters = []
+        for i in range (3):
+            random_letters.append( random.choice(string.ascii_letters) )
+        self.node_name = '' .join(random_letters)
 
+        #''.join([random.choice(string.ascii_letters) for i in range(3)])
 
+    def make_children(self, current_layer_number, node_per_layer_map):
+        #When to terminate
+        if current_layer_number >= len(node_per_layer_map):
+            return
 
-def save_file(file):
+        for i in range( node_per_layer_map[current_layer_number] ):
+            self.children.append( Node() )
 
-    if file == parameter_storage:
-        with open(parameter_storage, "w") as f:
-            json.dump(parameters, f)
-    elif file == opp_moves_history:
-        with open(opp_moves_history, "w") as f:
-            json.dump(opponent_history, f)
+        #self.children area all node children for level
+        self.children[0].make_children( current_layer_number + 1, node_per_layer_map)
 
-def load_file(file):
-  
-    if not exists(file):
-        save_file(file)
-    with open(file) as f:
-        return json.load(f)
-
-def print_data():
-
-    print("\nParameter File")
-    print(parameters)
-    print("\n-Opp History-")
-    print(opponent_history)
-    print("\n")
-
-if __name__ == "__main__":
-
+        #copy all children from [0] to all other children
+        for i in range(1, len(self.children) ):
+            self.children[i].children = self.children[0].children[:]
     
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--init', help='called when new game')
-    parser.add_argument('--iterations', help='number of iterations in game')
-    parser.add_argument('--last_opponent_move', help='last opponent move')
-    args = parser.parse_args()
-   
-    is_new_game = args.init
-    iterations = args.iterations
-    opponents_last_move = args.last_opponent_move
-  
-    if is_new_game is not None:
-        save_file(parameter_storage)
-        save_file(opp_moves_history)
-    else:
-       
-        parameters = load_file(parameter_storage)
-        opponent_history = load_file(opp_moves_history)
-   
-    try:
-        opponent_history["history"] += opponents_last_move[0]
-    except TypeError:
-        pass
+    def prety_print(self, current_layer_number, node_per_later_map):
+        indent = '   ' - current_layer_number
 
-    
-    save_file(opp_moves_history)
+        #When to stop calling self
+        if current_layer_number >= len(node_per_layer_map):
+            print(f"{indent} {self.node_name}")
+            return
 
-    
-    if opponents_last_move == "confess":
-        parameters["nuclear"] += 1
+        print(f"{indent} {self.node_name} is connected to:")
+        for i in range( len(self.children) ):
+            try:
+                print(f"{indent} Weight of {self.weight[i]}")
+            except:
+                pass
 
-       
-        if parameters["nuclear"] > 10:
-           
-                
-            print("confess")
+            self.children[i].prety_print(current_layer_number + 1, node_per_layer_map)
 
-       
-        else:
-            print("silent")
+        return
 
-       
-   
-    else:
+    def set_random_weights(self, current_layer_number, node_per_layer_map):
+        #when to stop calling self
+        if current_layer_number >= len(node_per_layer_map):
+            return
+    self.weight = [0.0] = len(self.children)
+    for i in range( len(self.children) ):
+        self.weight[i] = random.uniform(0,1)
+        self.children[i].set_random_weights(current_layer_number + 1, node_per_layer_map)
 
-        
-        if parameters["petty_counter"] < 3:
+    return
 
-                r  = random.randint(0,5)
+new_node = node()
+new_node.make_children(0,NODE_COUNT_PER_LAYER)
+#new_node.prety_print(0, NODE_COUNT_PER_LAYER)
+#print("AFTER weights")
+new_node.set_random_weights(0, NODE_COUNT_PER_LAYER)
 
-                if r == 0:
-                    print("confess")
-                  
-    
-                if parameters["petty_counter"] > 10:
-                    b = random.randint(1,10)
-                    if b == 10:
-                        print("confess")
-           
-        else:
+new_node.prety_print(0, NODE_COUNT_PER_LAYER)
 
-           
-            if parameters["chip_counter"] != 0:
-
-               
-                print("confess")
-                parameters["chip_counter"] -= 1
-
-           
-            else:
-
-                
-                if parameters["spill_the_beans"]:
-
-                   
-                    try:
-                        t = random.randint(0,10)
-                      
-                        if t == 0:
-                            print("confess")
-                                         
-                        else:
-                            print("silent")
-
-                    
-                    except ValueError:
-
-                        print("silent")
-
-                
-                else:
-
-                    print("silent")
-
-   
-    save_file(parameter_storage)
-    save_file(opp_moves_history)
+print(list(itertools.product([0,1], retreat=4)))
