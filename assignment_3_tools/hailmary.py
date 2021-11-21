@@ -2,7 +2,7 @@ import random
 import string
 
 RANDOM_NODE_NAMES = ["Kona", "Riley", "Nahla", "Otis", "Templeton", "Gilligan", "Swiss", "Cooper", "Murphy", "Bristol", "Brady", "Stitch", "Charlie", "Diesel",
-"Benji", "Archie", "Chi"]
+"Benji", "Archie", "Chi", "Simba", "Kado", "Lilo", "Kilo", "Echo", "Nobu"]
 
 NODE_PER_LAYER = [4,3,2] 
 class Node:
